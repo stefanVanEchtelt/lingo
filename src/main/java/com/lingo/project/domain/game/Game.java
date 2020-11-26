@@ -1,6 +1,7 @@
-package com.lingo.project.domain;
+package com.lingo.project.domain.game;
 
 import javax.persistence.*;
+import lombok.*;
 
 @Entity
 public class Game {
@@ -10,5 +11,5 @@ public class Game {
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "game_id_generator")
     private Long id;
 
-    private String name;
+    private int score;
 }
