@@ -1,5 +1,6 @@
 package com.lingo.project.word.core.application;
 
+import com.lingo.project.word.core.domain.Word;
 import com.lingo.project.word.core.domain.WordFilter;
 import com.lingo.project.word.core.ports.WordWriter;
 import org.springframework.stereotype.Service;
@@ -17,9 +18,10 @@ public class WordProcessor {
         this.wordWriter = wordWriter;
     }
 
-    public void addSingle(String word) {
-        if (this.wordFilter.verify(word)) {
-
+    public void addSingle(String wordValue) {
+        if (this.wordFilter.verify(wordValue)) {
+            Word word = Word.builder().value(wordValue).build();
+            this.wordWriter.writeWord(word);
         }
     }
 

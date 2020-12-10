@@ -4,7 +4,7 @@ import com.lingo.project.word.core.application.WordProcessor;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping("questions")
+@RequestMapping("word")
 public class WordImportController {
 
     public final WordProcessor wordProcessor;

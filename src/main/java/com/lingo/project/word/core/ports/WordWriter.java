@@ -1,5 +1,7 @@
 package com.lingo.project.word.core.ports;
 
+import com.lingo.project.word.core.domain.Word;
+
 public interface WordWriter {
-    boolean writeWord(String word);
+    boolean writeWord(Word word);
 }
