@@ -1,13 +1,15 @@
 package com.lingo.project.game.infastructure.driver.controller;
 
 import com.lingo.project.game.core.application.GameProcessor;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import com.lingo.project.game.core.domain.Game;
+import org.springframework.http.HttpStatus;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.http.ResponseEntity;
+
+import java.util.Optional;
 
 @RestController
-@RequestMapping("game")
+@RequestMapping("/game")
 public class GameController {
 
     public final GameProcessor gameProcessor;
@@ -16,8 +18,20 @@ public class GameController {
         this.gameProcessor = gameProcessor;
     }
 
-    @PostMapping(path = "/{word}")
-    public void add(@PathVariable String word) {
-        this.gameProcessor.start();
+    @PostMapping(path = "/start")
+    public ResponseEntity<Game> start() {
+        Game game = this.gameProcessor.start();
+        return new ResponseEntity<>(game, HttpStatus.OK);
+    }
+
+    @GetMapping(path = "/{id}")
+    public ResponseEntity<Game> add(@PathVariable Long id) {
+        Optional<Game> game = this.gameProcessor.find(id);
+
+        if (game.isPresent()) {
+            return new ResponseEntity<>(game.get(), HttpStatus.OK);
+        }
+
+        return new ResponseEntity<>(HttpStatus.NOT_FOUND);
     }
 }

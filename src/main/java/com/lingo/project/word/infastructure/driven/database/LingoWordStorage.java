@@ -1,20 +1,20 @@
 package com.lingo.project.word.infastructure.driven.database;
 
 import com.lingo.project.word.core.domain.Word;
-import com.lingo.project.word.core.ports.WordWriter;
+import com.lingo.project.word.core.ports.WordStorage;
 import org.springframework.stereotype.Service;
 
 @Service
-public class LingoWordWriter implements WordWriter {
+public class LingoWordStorage implements WordStorage {
 
     private final WordRepository wordRepository;
 
-    public LingoWordWriter(WordRepository wordRepository) {
+    public LingoWordStorage(WordRepository wordRepository) {
         this.wordRepository = wordRepository;
     }
 
     @Override
-    public boolean writeWord(Word word) {
+    public boolean store(Word word) {
         if (!this.wordRepository.existsByValue(word.getValue())) {
             this.wordRepository.save(word);
             return true;

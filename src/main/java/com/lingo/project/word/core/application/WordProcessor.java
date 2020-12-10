@@ -2,7 +2,7 @@ package com.lingo.project.word.core.application;
 
 import com.lingo.project.word.core.domain.Word;
 import com.lingo.project.word.core.domain.WordFilter;
-import com.lingo.project.word.core.ports.WordWriter;
+import com.lingo.project.word.core.ports.WordStorage;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -11,17 +11,17 @@ import java.util.List;
 public class WordProcessor {
 
     private final WordFilter wordFilter;
-    private final WordWriter wordWriter;
+    private final WordStorage wordStorage;
 
-    public WordProcessor(WordFilter wordFilter, WordWriter wordWriter) {
+    public WordProcessor(WordFilter wordFilter, WordStorage wordStorage) {
         this.wordFilter = wordFilter;
-        this.wordWriter = wordWriter;
+        this.wordStorage = wordStorage;
     }
 
     public void addSingle(String wordValue) {
         if (this.wordFilter.verify(wordValue)) {
             Word word = Word.builder().value(wordValue).build();
-            this.wordWriter.writeWord(word);
+            this.wordStorage.store(word);
         }
     }
 
