@@ -20,11 +20,7 @@ public class LingoGameStorage implements GameStorage {
     @Override
     public Game create() {
         Game game = new Game();
-        Round round = new Round();
-        round.setGame(game);
-
         game = this.gameRepository.save(game);
-        this.roundRepository.save(round);
 
         return game;
     }

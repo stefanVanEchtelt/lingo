@@ -18,7 +18,6 @@ import java.util.List;
 @Entity
 @Builder
 @AllArgsConstructor
-@NoArgsConstructor
 public class Game implements Serializable {
     @Id
     @SequenceGenerator(name = "game_id_generator", sequenceName = "game_seq", allocationSize = 1)
@@ -29,13 +28,21 @@ public class Game implements Serializable {
     @Enumerated(EnumType.STRING)
     private Status status = Status.PROGRESS;
 
-    @OneToMany(mappedBy = "game", fetch = FetchType.EAGER)
+    @OneToMany(mappedBy = "game", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @JsonIgnoreProperties("game")
-    private List<Round> rounds = new ArrayList<>();
+    private List<Round> rounds;
 
     @CreationTimestamp
     @Column(nullable = false, updatable = false)
     private Date createdAt;
+
+    public Game() {
+        Round round = new Round();
+        round.setGame(this);
+        List<Round> rounds = new ArrayList<>();
+        rounds.add(round);
+        this.setRounds(rounds);
+    }
 
     public void addRound(Round round) {
         if (this.rounds.contains(round)) {

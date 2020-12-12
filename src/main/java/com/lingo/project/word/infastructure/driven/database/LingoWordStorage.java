@@ -22,4 +22,9 @@ public class LingoWordStorage implements WordStorage {
 
         return false;
     }
+
+    @Override
+    public Word findRandomWordByLength(int length) {
+        return this.wordRepository.findRandomByWordLength(length);
+    }
 }

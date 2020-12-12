@@ -2,11 +2,15 @@ package com.lingo.project.game.core.domain;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.lingo.project.word.core.domain.Word;
+import com.lingo.project.word.core.ports.WordStorage;
+import com.lingo.project.word.infastructure.driven.database.LingoWordStorage;
+import com.lingo.project.word.infastructure.driven.database.WordRepository;
+import com.lingo.project.word.infastructure.driver.service.WordService;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
-import lombok.NoArgsConstructor;
 import org.hibernate.annotations.CreationTimestamp;
+import org.springframework.beans.factory.annotation.Autowired;
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -25,11 +29,12 @@ public class Round implements Serializable {
 
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "game_id", nullable = false)
+    @JsonIgnoreProperties("rounds")
     private Game game;
 
-//    @OneToOne(cascade = CascadeType.ALL)
-//    @JoinColumn(name = "word_id", referencedColumnName = "id")
-//    private Word word;
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "word_id", referencedColumnName = "id")
+    private Word word;
 
     private int tries;
 
@@ -38,6 +43,14 @@ public class Round implements Serializable {
     private Date createdAt;
 
     public Round() {
-        // TODO Set word based on amount of rounds
+        int wordLength = 5;
+        if (this.game != null && this.game.getRounds() != null) {
+            // TODO Set word based on amount of rounds
+        }
+
+//        WordService wordService = new WordService();
+//        Word word = this.wordService.findRandomWordByLength(wordLength);
+
+        this.setWord(word);
     }
 }
