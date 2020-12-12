@@ -48,6 +48,8 @@ public class Round implements Serializable {
             // TODO Set word based on amount of rounds
         }
 
+        // TODO word fix
+
 //        WordService wordService = new WordService();
 //        Word word = this.wordService.findRandomWordByLength(wordLength);
 

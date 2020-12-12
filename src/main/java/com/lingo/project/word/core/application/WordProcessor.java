@@ -9,7 +9,6 @@ import java.util.List;
 
 @Service
 public class WordProcessor {
-
     private final WordFilter wordFilter;
     private final WordStorage wordStorage;
 
