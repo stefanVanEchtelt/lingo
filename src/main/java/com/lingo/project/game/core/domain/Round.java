@@ -14,7 +14,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 @Data
 @Entity
@@ -32,15 +34,27 @@ public class Round implements Serializable {
     @JsonIgnoreProperties("rounds")
     private Game game;
 
-    @OneToOne(cascade = CascadeType.ALL)
+    @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     @JoinColumn(name = "word_id", referencedColumnName = "id")
     private Word word;
 
-    private int tries;
+    @OneToMany(mappedBy = "round", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    @JsonIgnoreProperties("round")
+    private List<Try> tries = new ArrayList<>();
 
     @CreationTimestamp
     @Column(nullable = false, updatable = false)
     private Date createdAt;
+
+    public RoundStatus getStatus() {
+        if (this.tries.size() == 0) {
+            return RoundStatus.START;
+        } else if (this.tries.size() >= 5) {
+            return RoundStatus.LOST;
+        }
+
+        return RoundStatus.PROGRESS;
+    }
 
     public Round() {
         int wordLength = 5;

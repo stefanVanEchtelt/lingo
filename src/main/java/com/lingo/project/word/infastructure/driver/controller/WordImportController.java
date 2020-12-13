@@ -21,9 +21,4 @@ public class WordImportController {
     public void add(@PathVariable String word) {
         this.wordProcessor.addSingle(word);
     }
-
-    @GetMapping(path = "/bier/bier")
-    public Word add() {
-        return this.lingoWordStorage.findRandomWordByLength(6);
-    }
 }

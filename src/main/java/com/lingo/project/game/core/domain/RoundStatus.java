@@ -1,6 +1,8 @@
 package com.lingo.project.game.core.domain;
 
-public enum Status {
+public enum RoundStatus {
+    START,
     PROGRESS,
-    FINISHED,
+    LOST,
+    WON
 }

@@ -1,11 +1,9 @@
 package com.lingo.project.game.core.domain;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import com.sun.istack.Nullable;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
-import lombok.NoArgsConstructor;
 import org.hibernate.annotations.CreationTimestamp;
 
 import javax.persistence.*;
@@ -26,9 +24,9 @@ public class Game implements Serializable {
 
     @Column(length = 32, columnDefinition = "varchar(32) default 'PROGRESS'")
     @Enumerated(EnumType.STRING)
-    private Status status = Status.PROGRESS;
+    private GameStatus gameStatus = GameStatus.PROGRESS;
 
-    @OneToMany(mappedBy = "game", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "game", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     @JsonIgnoreProperties("game")
     private List<Round> rounds;
 
