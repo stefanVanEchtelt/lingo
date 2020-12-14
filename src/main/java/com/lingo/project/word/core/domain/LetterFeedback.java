@@ -7,5 +7,6 @@ import lombok.Data;
 @AllArgsConstructor
 public class LetterFeedback {
     private char letter;
+    private int index;
     private LetterDifferenceStatus feedback;
 }
