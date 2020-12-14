@@ -1,8 +1,6 @@
 package com.lingo.project.game.infastructure.driver.controller;
 
-import com.lingo.project.game.core.application.GameProcessor;
 import com.lingo.project.game.core.application.RoundProcessor;
-import com.lingo.project.game.core.domain.Game;
 import com.lingo.project.game.core.domain.Round;
 import com.lingo.project.word.core.domain.WordFeedback;
 import org.springframework.http.HttpStatus;

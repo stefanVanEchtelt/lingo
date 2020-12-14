@@ -20,18 +20,30 @@ class LingoWordDifferenceTest {
     }
 
     @Test
-    void checkWordDifference() {
+    void checkInvallidWordDifference() {
         List<LetterFeedback> letterFeedbacks = new ArrayList<>();
-        letterFeedbacks.add(new LetterFeedback('b', LetterDifferenceStatus.INVALID));
-        letterFeedbacks.add(new LetterFeedback('e', LetterDifferenceStatus.INVALID));
-        letterFeedbacks.add(new LetterFeedback('r', LetterDifferenceStatus.INVALID));
-        letterFeedbacks.add(new LetterFeedback('g', LetterDifferenceStatus.INVALID));
-        letterFeedbacks.add(new LetterFeedback('e', LetterDifferenceStatus.INVALID));
-        letterFeedbacks.add(new LetterFeedback('n', LetterDifferenceStatus.INVALID));
+        String checkWord = "bergem";
+        for (char letter: checkWord.toCharArray()) {
+            letterFeedbacks.add(new LetterFeedback(letter, LetterDifferenceStatus.INVALID));
+        }
 
         WordFeedback expectedResult = WordFeedback.builder().status(WordDifferenceStatus.INVALID).letterFeedback(letterFeedbacks).build();
 
-        WordFeedback result = this.difference.check("baard", "bergen");
+        WordFeedback result = this.difference.check("baard", checkWord);
+        assertEquals(result, expectedResult);
+    }
+
+    @Test
+    void checkCorrectWord() {
+        List<LetterFeedback> letterFeedbacks = new ArrayList<>();
+        String checkWord = "baard";
+        for (char letter: checkWord.toCharArray()) {
+            letterFeedbacks.add(new LetterFeedback(letter, LetterDifferenceStatus.CORRECT));
+        }
+
+        WordFeedback expectedResult = WordFeedback.builder().status(WordDifferenceStatus.CORRECT).letterFeedback(letterFeedbacks).build();
+
+        WordFeedback result = this.difference.check("baard", checkWord);
         assertEquals(result, expectedResult);
     }
 
