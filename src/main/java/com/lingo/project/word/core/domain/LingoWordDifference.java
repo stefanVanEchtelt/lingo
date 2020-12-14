@@ -51,9 +51,7 @@ public class LingoWordDifference implements WordDifference {
         checkWord = String.valueOf(checkWordLetters);
         String correctWord = String.valueOf(correctWordLetters);
 
-        letterFeedback = this.checkIfLetterPresent(letterFeedback, correctWord, checkWord);
-
-        return WordFeedback.builder().letterFeedback(letterFeedback).status(WordDifferenceStatus.INCORRECT).build();
+        return WordFeedback.builder().letterFeedback(this.checkIfLetterPresent(letterFeedback, correctWord, checkWord)).status(WordDifferenceStatus.INCORRECT).build();
     }
 
     private List<LetterFeedback> checkIfLetterPresent(List<LetterFeedback> letterFeedback, String correctWord, String checkWord) {
