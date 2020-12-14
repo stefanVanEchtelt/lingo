@@ -7,6 +7,7 @@ import com.lingo.project.game.core.ports.GameStorage;
 import com.lingo.project.game.core.ports.RoundStorage;
 import com.lingo.project.game.core.ports.TryStorage;
 import com.lingo.project.game.core.ports.resource.TryResource;
+import com.lingo.project.word.core.domain.Word;
 import com.lingo.project.word.core.domain.WordFeedback;
 import com.lingo.project.word.infastructure.driver.service.WordService;
 import org.springframework.stereotype.Service;
@@ -36,6 +37,19 @@ public class RoundProcessor {
         return this.gameStorage.update(game);
     }
 
+    public Game createNewRound(Game game) {
+        Word word = this.wordService.findRandomWordByLength(game.nextWordSize());
+
+        Round round = new Round();
+        round.setGame(game);
+        round.setWord(word);
+        round = this.roundStorage.save(round);
+
+        game.addRound(round);
+
+        return game;
+    }
+
     public TryResource validateWord(Round round, String word) {
         WordFeedback wordFeedback = this.wordService.checkIfWordsAreTheSame(round.getWord(), word);
         Game game = round.getGame();
@@ -44,8 +58,7 @@ public class RoundProcessor {
         this.tryStorage.create(t);
 
         if (wordFeedback.isCorrect()) {
-            // TODO finish round and create new round
-
+            game = this.createNewRound(game);
         } else if (round.getTries().size() >= 5) {
             game = this.endGame(game);
         }

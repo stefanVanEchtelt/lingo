@@ -72,6 +72,10 @@ public class Round implements Serializable {
         return this.getStatus() == RoundStatus.START || this.getStatus() == RoundStatus.PROGRESS;
     }
 
+    public Long getId() {
+        return id;
+    }
+
     public List<Try> getTries() {
         return tries;
     }
@@ -94,5 +98,9 @@ public class Round implements Serializable {
 
     public Word getWord() {
         return word;
+    }
+
+    public Date getCreatedAt() {
+        return createdAt;
     }
 }

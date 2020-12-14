@@ -51,7 +51,8 @@ public class Game implements Serializable {
     }
 
     public Round getCurrentRound() {
-        // TODO fix get last sort by created_at date
-        return this.rounds.get(0);
+        this.rounds.sort((r1, r2) -> r1.getCreatedAt().compareTo(r2.getCreatedAt()));
+
+        return this.rounds.get(this.rounds.size() - 1);
     }
 }

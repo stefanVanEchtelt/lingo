@@ -6,4 +6,5 @@ import java.util.Optional;
 
 public interface RoundStorage {
     public Optional<Round> find(Long id);
+    public Round save(Round round);
 }
