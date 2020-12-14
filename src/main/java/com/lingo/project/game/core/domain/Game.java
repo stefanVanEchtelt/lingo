@@ -37,7 +37,7 @@ public class Game implements Serializable {
     private Date createdAt;
 
     public int nextWordSize() {
-        return 5;
+        return 5 + (this.rounds.size() % 3);
     }
 
     public void addRound(Round round) {
