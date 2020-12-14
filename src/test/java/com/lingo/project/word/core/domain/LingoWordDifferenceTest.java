@@ -47,12 +47,6 @@ class LingoWordDifferenceTest {
         assertEquals(result, expectedResult);
     }
 
-//    static Stream<Arguments> provideWordsAndResult() {
-//        return Stream.of(
-//                Arguments.of("baard", "bergen", new HashMap<Character, LetterDifferenceStatus>().put("b", )),
-//        );
-
-
 //        bergen
 //        bonje
 //        barst
