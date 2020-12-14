@@ -51,7 +51,13 @@ public class LingoWordDifference implements WordDifference {
         checkWord = String.valueOf(checkWordLetters);
         String correctWord = String.valueOf(correctWordLetters);
 
-        index = 0;
+        letterFeedback = this.checkIfLetterPresent(letterFeedback, correctWord, checkWord);
+
+        return WordFeedback.builder().letterFeedback(letterFeedback).status(WordDifferenceStatus.INCORRECT).build();
+    }
+
+    private List<LetterFeedback> checkIfLetterPresent(List<LetterFeedback> letterFeedback, String correctWord, String checkWord) {
+        int index = 0;
         for (Character letter: checkWord.toCharArray()) {
             if (letter != ' ') {
                 if (correctWord.contains(letter.toString())) {
@@ -63,6 +69,6 @@ public class LingoWordDifference implements WordDifference {
             index++;
         }
 
-        return WordFeedback.builder().letterFeedback(letterFeedback).status(WordDifferenceStatus.INCORRECT).build();
+        return letterFeedback;
     }
 }
