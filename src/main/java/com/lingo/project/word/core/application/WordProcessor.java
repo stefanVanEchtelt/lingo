@@ -29,4 +29,8 @@ public class WordProcessor {
             this.addSingle(word);
         }
     }
+
+    public Word findRandomWordByLength(int length) {
+        return this.wordStorage.findRandomWordByLength(length);
+    }
 }

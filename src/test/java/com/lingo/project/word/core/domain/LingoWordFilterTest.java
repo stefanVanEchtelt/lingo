@@ -19,14 +19,14 @@ class LingoWordFilterTest {
 
     @ParameterizedTest
     @MethodSource("provideWordsOfVaryingLength")
-    void accepts_words_of_5_6_7_letters_only(String word, boolean shouldAccept) {
+    void acceptsWordsOf5Or6Or7LettersOnly(String word, boolean shouldAccept) {
         boolean accepts = this.filter.verify(word);
         assertEquals(shouldAccept, accepts);
     }
 
     @ParameterizedTest
     @MethodSource("provideWordsOfVaryingCaseSymbols")
-    void accepts_words_of_lowercase_letters_only(String word, boolean shouldAccept) {
+    void acceptsWordsOfLowercaseLettersOnly(String word, boolean shouldAccept) {
         boolean accepts = this.filter.verify(word);
         assertEquals(shouldAccept, accepts);
     }
