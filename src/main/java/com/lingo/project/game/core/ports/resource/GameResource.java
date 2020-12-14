@@ -11,13 +11,12 @@ public class GameResource {
     private Long id;
     private GameStatus gameStatus;
     private Date createdAt;
+    private RoundResource currentRound;
 
     public GameResource(Game game) {
         this.id = game.getId();
         this.gameStatus = game.getGameStatus();
         this.createdAt = game.getCreatedAt();
-
-        System.out.println("DDDDDD");
-        System.out.println(game.getCurrentRound());
+        this.currentRound = new RoundResource(game.getCurrentRound());
     }
 }

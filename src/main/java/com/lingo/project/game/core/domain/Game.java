@@ -47,8 +47,7 @@ public class Game implements Serializable {
     }
 
     public Round getCurrentRound() {
-        System.out.println(this.rounds);
-        System.out.println(this.rounds.size());
-        return new Round();
+        // TODO fix get last sort by created_at date
+        return this.rounds.get(0);
     }
 }
