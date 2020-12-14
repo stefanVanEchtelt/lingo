@@ -1,6 +1,7 @@
 package com.lingo.project.game.core.domain;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.lingo.project.word.core.domain.WordDifferenceStatus;
 import com.sun.istack.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -29,4 +30,12 @@ public class Try implements Serializable {
 
     @NotNull
     private String value;
+
+    public boolean isCorrect() {
+        if (this.round.getWord() != null && this.round.getWord().getValue() != null) {
+            return this.round.getWord().getValue().equals(this.value);
+        }
+
+        return false;
+    }
 }

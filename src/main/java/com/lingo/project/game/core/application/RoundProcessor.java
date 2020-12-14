@@ -1,10 +1,13 @@
 package com.lingo.project.game.core.application;
 
+import com.lingo.project.game.core.domain.Game;
 import com.lingo.project.game.core.domain.Round;
+import com.lingo.project.game.core.domain.Try;
+import com.lingo.project.game.core.ports.GameStorage;
 import com.lingo.project.game.core.ports.RoundStorage;
-import com.lingo.project.word.core.domain.Word;
+import com.lingo.project.game.core.ports.TryStorage;
+import com.lingo.project.game.core.ports.resource.TryResource;
 import com.lingo.project.word.core.domain.WordFeedback;
-import com.lingo.project.word.core.domain.WordFilter;
 import com.lingo.project.word.infastructure.driver.service.WordService;
 import org.springframework.stereotype.Service;
 
@@ -13,18 +16,40 @@ import java.util.Optional;
 @Service
 public class RoundProcessor {
     private final RoundStorage roundStorage;
+    private final GameStorage gameStorage;
     private final WordService wordService;
+    private final TryStorage tryStorage;
 
-    public RoundProcessor(RoundStorage roundStorage, WordService wordService) {
+    public RoundProcessor(RoundStorage roundStorage, GameStorage gameStorage, WordService wordService, TryStorage tryStorage) {
         this.roundStorage = roundStorage;
+        this.gameStorage = gameStorage;
         this.wordService = wordService;
+        this.tryStorage = tryStorage;
     }
 
     public Optional<Round> find(Long id) {
         return this.roundStorage.find(id);
     }
 
-    public WordFeedback validate(Round round, String word) {
-        return this.wordService.checkIfWordsAreTheSame(round.getWord(), word);
+    public Game endGame(Game game) {
+        game.end();
+        return this.gameStorage.update(game);
+    }
+
+    public TryResource validateWord(Round round, String word) {
+        WordFeedback wordFeedback = this.wordService.checkIfWordsAreTheSame(round.getWord(), word);
+        Game game = round.getGame();
+
+        Try t = Try.builder().round(round).value(word).build();
+        this.tryStorage.create(t);
+
+        if (wordFeedback.isCorrect()) {
+            // TODO finish round and create new round
+
+        } else if (round.getTries().size() >= 5) {
+            game = this.endGame(game);
+        }
+
+        return new TryResource(game, wordFeedback);
     }
 }

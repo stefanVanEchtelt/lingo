@@ -2,7 +2,7 @@ package com.lingo.project.game.infastructure.driver.controller;
 
 import com.lingo.project.game.core.application.RoundProcessor;
 import com.lingo.project.game.core.domain.Round;
-import com.lingo.project.word.core.domain.WordFeedback;
+import com.lingo.project.game.core.ports.resource.TryResource;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -27,8 +27,14 @@ public class RoundController {
         Optional<Round> optionalRound = this.roundProcessor.find(roundId);
 
         if (optionalRound.isPresent()) {
-            WordFeedback wordFeedback = this.roundProcessor.validate(optionalRound.get(), word);
-            return new ResponseEntity<>(wordFeedback, HttpStatus.OK);
+            Round round = optionalRound.get();
+            if (round.canAnswer()) {
+                TryResource tryResource = this.roundProcessor.validateWord(round, word);
+
+                return new ResponseEntity<>(tryResource, HttpStatus.OK);
+            }
+
+            return new ResponseEntity<>("You cant answer for this round anymore", HttpStatus.BAD_REQUEST);
         }
 
         return new ResponseEntity<>(HttpStatus.NOT_FOUND);

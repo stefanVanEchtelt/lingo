@@ -20,4 +20,8 @@ public class WordFeedback {
         Collections.sort(this.letterFeedback, Comparator.comparingInt(LetterFeedback::getIndex));
         return this.letterFeedback;
     }
+
+    public boolean isCorrect() {
+        return this.status == WordDifferenceStatus.CORRECT;
+    }
 }

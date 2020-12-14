@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 import org.hibernate.annotations.CreationTimestamp;
 
 import javax.persistence.*;
@@ -16,6 +17,7 @@ import java.util.List;
 @Entity
 @Builder
 @AllArgsConstructor
+@NoArgsConstructor
 public class Game implements Serializable {
     @Id
     @SequenceGenerator(name = "game_id_generator", sequenceName = "game_seq", allocationSize = 1)
@@ -26,25 +28,27 @@ public class Game implements Serializable {
     @Enumerated(EnumType.STRING)
     private GameStatus gameStatus = GameStatus.PROGRESS;
 
-    @OneToMany(mappedBy = "game", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "game", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @JsonIgnoreProperties("game")
-    private List<Round> rounds;
+    private List<Round> rounds = new ArrayList<>();
 
     @CreationTimestamp
     @Column(nullable = false, updatable = false)
     private Date createdAt;
 
-    public Game() {
-        Round round = new Round();
-        round.setGame(this);
-        List<Round> rounds = new ArrayList<>();
-        rounds.add(round);
-        this.setRounds(rounds);
-    }
-
     public void addRound(Round round) {
-        if (this.rounds.contains(round)) {
+        if (!this.rounds.contains(round)) {
             this.rounds.add(round);
         }
+    }
+
+    public void end() {
+        this.gameStatus = GameStatus.FINISHED;
+    }
+
+    public Round getCurrentRound() {
+        System.out.println(this.rounds);
+        System.out.println(this.rounds.size());
+        return new Round();
     }
 }

@@ -6,5 +6,6 @@ import java.util.Optional;
 
 public interface GameStorage {
     public Game create();
+    public Game update(Game game);
     public Optional<Game> find(Long id);
 }
