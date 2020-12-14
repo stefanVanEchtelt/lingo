@@ -10,11 +10,9 @@ import java.util.List;
 public class RoundResource {
     private int worthLength;
     private int amountOfTries;
-    private List<Try> tries;
 
     public RoundResource(Round round) {
         this.worthLength = round.getWord().getValue().length();
-        this.tries = round.getTries();
         this.amountOfTries = round.getTries().size();
     }
 }

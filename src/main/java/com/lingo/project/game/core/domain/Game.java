@@ -36,6 +36,10 @@ public class Game implements Serializable {
     @Column(nullable = false, updatable = false)
     private Date createdAt;
 
+    public int nextWordSize() {
+        return 5;
+    }
+
     public void addRound(Round round) {
         if (!this.rounds.contains(round)) {
             this.rounds.add(round);

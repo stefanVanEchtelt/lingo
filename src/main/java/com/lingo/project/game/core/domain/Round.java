@@ -69,7 +69,7 @@ public class Round implements Serializable {
     }
 
     public boolean canAnswer() {
-        return this.getStatus() == RoundStatus.PROGRESS || this.getStatus() == RoundStatus.PROGRESS;
+        return this.getStatus() == RoundStatus.START || this.getStatus() == RoundStatus.PROGRESS;
     }
 
     public List<Try> getTries() {
