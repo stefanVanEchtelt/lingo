@@ -46,6 +46,8 @@ public class RoundProcessor {
         round = this.roundStorage.save(round);
 
         game.addRound(round);
+        game.correctWord();
+        game = this.gameStorage.update(game);
 
         return game;
     }

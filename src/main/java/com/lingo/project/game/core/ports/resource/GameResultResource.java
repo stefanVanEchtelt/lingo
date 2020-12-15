@@ -7,18 +7,16 @@ import lombok.Data;
 import java.util.Date;
 
 @Data
-public class GameResource {
+public class GameResultResource {
     private Long id;
     private GameStatus gameStatus;
     private Date createdAt;
-    private RoundResource currentRound;
     private int currentScore;
 
-    public GameResource(Game game) {
+    public GameResultResource(Game game) {
         this.id = game.getId();
         this.gameStatus = game.getGameStatus();
         this.createdAt = game.getCreatedAt();
         this.currentScore = game.getScore();
-        this.currentRound = new RoundResource(game.getCurrentRound());
     }
 }

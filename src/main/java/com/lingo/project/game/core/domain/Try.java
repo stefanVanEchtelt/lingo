@@ -1,15 +1,16 @@
 package com.lingo.project.game.core.domain;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import com.lingo.project.word.core.domain.WordDifferenceStatus;
 import com.sun.istack.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.hibernate.annotations.CreationTimestamp;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.Date;
 
 @Data
 @Entity
@@ -27,6 +28,10 @@ public class Try implements Serializable {
     @JoinColumn(name = "round_id", nullable = false)
     @JsonIgnoreProperties("tries")
     private Round round;
+
+    @CreationTimestamp
+    @Column(nullable = false, updatable = false)
+    private Date createdAt;
 
     @NotNull
     private String value;

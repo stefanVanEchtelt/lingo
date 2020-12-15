@@ -34,11 +34,16 @@ public class LingoGameStorage implements GameStorage {
     }
 
     public Game update(Game game) {
-        return game;
+        return this.gameRepository.save(game);
     }
 
     @Override
     public Optional<Game> find(Long id) {
         return this.gameRepository.findById(id);
+    }
+
+    @Override
+    public List<Game> highScores(int amount) {
+        return this.gameRepository.allHighScores(amount);
     }
 }

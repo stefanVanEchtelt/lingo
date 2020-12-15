@@ -2,16 +2,10 @@ package com.lingo.project.game.core.domain;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.lingo.project.word.core.domain.Word;
-import com.lingo.project.word.core.ports.WordStorage;
-import com.lingo.project.word.infastructure.driven.database.LingoWordStorage;
-import com.lingo.project.word.infastructure.driven.database.WordRepository;
-import com.lingo.project.word.infastructure.driver.service.WordService;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
-import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.hibernate.annotations.CreationTimestamp;
-import org.springframework.beans.factory.annotation.Autowired;
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -66,6 +60,10 @@ public class Round implements Serializable {
         }
 
         return RoundStatus.PROGRESS;
+    }
+
+    public boolean reactedInTime() {
+        return true;
     }
 
     public boolean canAnswer() {

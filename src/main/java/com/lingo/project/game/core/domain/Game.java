@@ -1,6 +1,7 @@
 package com.lingo.project.game.core.domain;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -36,10 +37,16 @@ public class Game implements Serializable {
     @Column(nullable = false, updatable = false)
     private Date createdAt;
 
+    @Column(nullable = false)
+    private int score = 0;
+
+    private String username;
+
     public int nextWordSize() {
         return 5 + (this.rounds.size() % 3);
     }
 
+    @JsonIgnoreProperties("game")
     public void addRound(Round round) {
         if (!this.rounds.contains(round)) {
             this.rounds.add(round);
@@ -54,5 +61,9 @@ public class Game implements Serializable {
         this.rounds.sort((r1, r2) -> r1.getCreatedAt().compareTo(r2.getCreatedAt()));
 
         return this.rounds.get(this.rounds.size() - 1);
+    }
+
+    public void correctWord() {
+        this.score = this.score + 1;
     }
 }

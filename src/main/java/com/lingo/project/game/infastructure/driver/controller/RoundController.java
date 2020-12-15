@@ -28,13 +28,15 @@ public class RoundController {
 
         if (optionalRound.isPresent()) {
             Round round = optionalRound.get();
-            if (round.canAnswer()) {
-                TryResource tryResource = this.roundProcessor.validateWord(round, word);
-
-                return new ResponseEntity<>(tryResource, HttpStatus.OK);
+            if (!round.canAnswer()) {
+                return new ResponseEntity<>("You cant answer for this round anymore", HttpStatus.BAD_REQUEST);
+            } else if (!round.reactedInTime()) {
+                return new ResponseEntity<>("You where to slow with answering", HttpStatus.BAD_REQUEST);
             }
 
-            return new ResponseEntity<>("You cant answer for this round anymore", HttpStatus.BAD_REQUEST);
+            TryResource tryResource = this.roundProcessor.validateWord(round, word);
+
+            return new ResponseEntity<>(tryResource, HttpStatus.OK);
         }
 
         return new ResponseEntity<>(HttpStatus.NOT_FOUND);
