@@ -21,7 +21,7 @@ jobs:
       run: mvn -B package --file pom.xml
 
   sonarCloud:
-    needs: [build]
+    needs: [compile]
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v2
@@ -36,6 +36,7 @@ jobs:
         SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
 
   tests:
+    needs: [compile]
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
