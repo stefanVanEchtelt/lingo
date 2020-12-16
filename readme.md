@@ -1,4 +1,6 @@
 # Lingo application
-My lingo application
+Deze lingo applicatie draait met docker en kan gerund worden met docker-compose up.
+Door dit command te draaien word de DB en de applicatie gestart (port 9091).
 
-De database van deze applicatie run je door docker-compose up te draaien
+In deze applicatie zit ook sonarCloud (code checker).
+
