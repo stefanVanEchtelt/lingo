@@ -1,25 +1,26 @@
 version: "3.1"
 services:
-  mysql_database:
-    container_name: database
-    image: mysql:8.0
+  postgress_database:
+    container_name: postgress_database
+    image: postgres
     environment:
-      MYSQL_DATABASE: "lingo"
-      MYSQL_USER: "admin"
-      MYSQL_PASSWORD: "test1234"
-      MYSQL_ROOT_PASSWORD: "test1234"
+      POSTGRES_DB: "lingo"
+      POSTGRES_USER: "admin"
+      POSTGRES_PASSWORD: "test1234"
     ports:
-      - "3306:3306"
+      - "5432:5432"
     volumes:
-      - mysql_db_data:/var/lib/mysql
+      - postgress_db_data:/var/lib/mysql
+  adminer:
+    image: adminer
+    restart: always
+    ports:
+      - 8080:8080
   spring_boot:
     depends_on:
-      - "mysql_database"
+      - "postgress_database"
     build: .
     ports:
       - "9091:9091"
-#    volumes:
-#      - ${APPLICATION_ROOT_FOLDER}:/usr/src/mymaven
-#      - ${MAVEN_SETTINGS_FOLDER}:/root/.m2
 volumes:
-  mysql_db_data:
+  postgress_db_data:

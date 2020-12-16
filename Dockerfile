@@ -5,6 +5,6 @@ RUN apt-get update && apt-get install dos2unix && dos2unix /usr/local/bin/entryp
 
 #Start application
 WORKDIR /usr/src/mymaven
-COPY . .
+#COPY . .
 ENTRYPOINT ["/usr/local/bin/entrypoint.sh"]
 CMD ["bash"]
