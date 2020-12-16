@@ -30,7 +30,7 @@ jobs:
       with:
         java-version: 1.14
     - name: Analyze with SonarCloud
-      run: mvn sonar:sonar -Dsonar.projectKey=lingo -Dsonar.organization=stefanvanechtelt -Dsonar.host.url=https://sonarcloud.io -Dsonar.login=${{ secrets.SONAR_TOKEN }}
+      run: mvn clean deploy sonar:sonar -Dsonar.projectKey=lingo -Dsonar.organization=stefanvanechtelt -Dsonar.host.url=https://sonarcloud.io -Dsonar.login=${{ secrets.SONAR_TOKEN }}
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
