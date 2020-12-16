@@ -19,11 +19,11 @@ jobs:
         java-version: 1.14
     - name: Build with Maven
       run: mvn -B package --file pom.xml
-#    - name: Save results
-#      uses: actions/upload-artifact@v2
-#      with:
-#        name: builded_app
-#        path: artifects
+    - name: Save results
+      uses: actions/upload-artifact@v2
+      with:
+        name: builded_app
+        path: traget/project-0.0.1-SNAPSHOT.jar
 #    - name: unit test
 #      run: mvn test
 
@@ -32,7 +32,9 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - name: Setup
-      uses: actions/checkout@v2
+      uses: actions/download-artifact@v2
+      with:
+        name: builded_app
     - name: Analyze with SonarCloud
       run: mvn sonar:sonar -Dsonar.projectKey=lingo -Dsonar.organization=stefanvanechtelt -Dsonar.host.url=https://sonarcloud.io -Dsonar.login=${{ secrets.SONAR_TOKEN }}
       env:
