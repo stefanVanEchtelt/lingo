@@ -16,7 +16,7 @@ public class TxtFileWordReader implements WordReader {
 	private final Path source;
 
 	public TxtFileWordReader() {
-		this.source = Paths.get("/Users/stefanvanechtelt/Documents/school/2020-2021/backend programming/startup.txt");
+		this.source = Paths.get("./startup.txt");
 	}
 
 	@Override
