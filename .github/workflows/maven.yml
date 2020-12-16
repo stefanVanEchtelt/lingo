@@ -36,7 +36,6 @@ jobs:
         SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
 
   tests:
-    needs: [build]
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
