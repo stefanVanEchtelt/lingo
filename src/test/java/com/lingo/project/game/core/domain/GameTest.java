@@ -46,4 +46,14 @@ class GameTest {
 
         assertEquals(5, wordSize);
     }
+
+    @Test
+    public void checkCorrectWord() {
+        Game game = new Game();
+        game.setScore(3);
+
+        game.correctWord();
+
+        assertEquals(4, game.getScore());
+    }
 }
