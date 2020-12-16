@@ -21,8 +21,3 @@ jobs:
       run: mvn -B package --file pom.xml
     - name: unit test
       run: mvn test
-  testing:
-    runs-on: ubuntu-latest
-    steps:
-      - name: unit test
-        run: mvn test
