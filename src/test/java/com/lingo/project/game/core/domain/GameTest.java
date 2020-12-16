@@ -6,7 +6,7 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class GameTest {
     @Test
-    public void zeroRoundsNextWord5LettersCheck() {
+    void zeroRoundsNextWord5LettersCheck() {
         Game game = new Game();
 
         int wordSize = game.nextWordSize();
@@ -15,7 +15,7 @@ class GameTest {
     }
 
     @Test
-    public void oneRoundNextWord5LettersCheck() {
+    void oneRoundNextWord5LettersCheck() {
         Game game = new Game();
         game.addRound(new Round());
 
@@ -25,7 +25,7 @@ class GameTest {
     }
 
     @Test
-    public void twoRoundNextWord5LettersCheck() {
+    void twoRoundNextWord5LettersCheck() {
         Game game = new Game();
         game.addRound(new Round());
         game.addRound(new Round());
@@ -36,7 +36,7 @@ class GameTest {
     }
 
     @Test
-    public void treeRoundNextWord5LettersCheck() {
+    void treeRoundNextWord5LettersCheck() {
         Game game = new Game();
         game.addRound(new Round());
         game.addRound(new Round());
@@ -48,7 +48,7 @@ class GameTest {
     }
 
     @Test
-    public void checkCorrectWord() {
+    void checkCorrectWord() {
         Game game = new Game();
         game.setScore(3);
 
