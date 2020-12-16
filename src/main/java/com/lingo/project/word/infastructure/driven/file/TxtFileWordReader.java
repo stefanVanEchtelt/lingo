@@ -22,7 +22,7 @@ public class TxtFileWordReader implements WordReader {
 	@Override
 	public Stream<String> readWords() {
 		try {
-			log.info("Reading words from file {}", this.source);
+			log.info("Reading words from file {}...", this.source);
 			return Files.lines(this.source);
 		} catch (IOException e) {
 			throw new RuntimeException(e);
