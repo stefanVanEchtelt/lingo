@@ -1,4 +1,5 @@
-[![Coverage Status](https://coveralls.io/repos/github/stefanVanEchtelt/lingo/badge.svg?branch=main)](https://coveralls.io/github/stefanVanEchtelt/lingo?branch=main)
+[![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=lingo&metric=alert_status)](https://sonarcloud.io/dashboard?id=lingo)
+[![SonarCloud](https://sonarcloud.io/images/project_badges/sonarcloud-white.svg)](https://sonarcloud.io/dashboard?id=lingo)
 
 # Lingo application
 Deze lingo applicatie draait met docker en kan gerund worden met docker-compose up.
