@@ -9,6 +9,7 @@ import org.hibernate.annotations.CreationTimestamp;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -62,7 +63,25 @@ public class Round implements Serializable {
         return RoundStatus.PROGRESS;
     }
 
+    private Try getLastTry() {
+        if (this.tries.size() > 0) {
+            this.tries.sort((r1, r2) -> r1.getCreatedAt().compareTo(r2.getCreatedAt()));
+            return this.tries.get(this.tries.size() - 1);
+        }
+
+        return null;
+    }
+
     public boolean reactedInTime() {
+        Try lastTry = this.getLastTry();
+        if (lastTry != null) {
+            Timestamp now = new Timestamp(System.currentTimeMillis());
+            int secondsBetween = (int) ((now.getTime() - lastTry.getCreatedAt().getTime()) / 1000);
+            if (secondsBetween > 10) {
+                return false;
+            }
+        }
+
         return true;
     }
 

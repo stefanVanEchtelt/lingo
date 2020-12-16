@@ -8,7 +8,6 @@ on:
     branches: [ main ]
   pull_request:
     branches: [ main ]
-
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -22,3 +21,9 @@ jobs:
       run: mvn -B package --file pom.xml
     - name: unit test
       run: mvn test
+  testing:
+    runs-on: ubuntu-latest
+    depends-on: build
+    steps:
+      - name: unit test
+          run: mvn test

@@ -31,6 +31,7 @@ public class RoundController {
             if (!round.canAnswer()) {
                 return new ResponseEntity<>("You cant answer for this round anymore", HttpStatus.BAD_REQUEST);
             } else if (!round.reactedInTime()) {
+                this.roundProcessor.endGame(round.getGame());
                 return new ResponseEntity<>("You where to slow with answering", HttpStatus.BAD_REQUEST);
             }
 
