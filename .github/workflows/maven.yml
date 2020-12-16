@@ -21,12 +21,12 @@ jobs:
       run: mvn -B package --file pom.xml
     - name: unit test
       run: mvn test
-    - name: Analyze with SonarCloud
   sonarCloud:
     needs: [build]
     runs-on: ubuntu-latest
     steps:
-      uses: [build]
+    - uses: [build]
+    - name: Analyze with SonarCloud
       run: mvn sonar:sonar -Dsonar.projectKey=lingo -Dsonar.organization=stefanvanechtelt -Dsonar.host.url=https://sonarcloud.io -Dsonar.login=${{ secrets.SONAR_TOKEN }}
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
