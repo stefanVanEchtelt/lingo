@@ -85,7 +85,7 @@
                     <archive>
                         <manifest>
                             <addClasspath>true</addClasspath>
-                            <classpathPrefix>lib/</classpathPrefix>
+                            <classpathPrefix>src/main/java/</classpathPrefix>
                             <mainClass>com.lingo.project.ProjectApplication</mainClass>
                         </manifest>
                     </archive>
