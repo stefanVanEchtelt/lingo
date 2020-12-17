@@ -3,6 +3,7 @@ package com.lingo.project.game.infastructure.driver.controller;
 import com.lingo.project.game.core.application.RoundProcessor;
 import com.lingo.project.game.core.domain.Round;
 import com.lingo.project.game.core.ports.resource.TryResource;
+import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -14,13 +15,10 @@ import java.util.Optional;
 
 @RestController
 @RequestMapping("/round")
+@AllArgsConstructor
 public class RoundController {
 
     public final RoundProcessor roundProcessor;
-
-    public RoundController(RoundProcessor roundProcessor) {
-        this.roundProcessor = roundProcessor;
-    }
 
     @PutMapping(path = "/{roundId}/try/{word}")
     public ResponseEntity<?> tryWordOnRound(@PathVariable Long roundId, @PathVariable String word) {
