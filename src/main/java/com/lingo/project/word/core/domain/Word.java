@@ -22,5 +22,5 @@ public class Word {
     public String value;
 
     @Column(columnDefinition = "boolean default false")
-    public boolean is_deleted;
+    public boolean isDeleted = false;
 }

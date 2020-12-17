@@ -3,19 +3,16 @@ package com.lingo.project.word.core.application;
 import com.lingo.project.word.core.domain.Word;
 import com.lingo.project.word.core.domain.WordFilter;
 import com.lingo.project.word.core.ports.WordStorage;
+import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
 @Service
+@AllArgsConstructor
 public class WordProcessor {
     private final WordFilter wordFilter;
     private final WordStorage wordStorage;
-
-    public WordProcessor(WordFilter wordFilter, WordStorage wordStorage) {
-        this.wordFilter = wordFilter;
-        this.wordStorage = wordStorage;
-    }
 
     public void addSingle(String wordValue) {
         if (this.wordFilter.verify(wordValue)) {

@@ -2,9 +2,7 @@ package com.lingo.project.game.core.domain;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.lingo.project.word.core.domain.Word;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.NoArgsConstructor;
+import lombok.*;
 import org.hibernate.annotations.CreationTimestamp;
 
 import javax.persistence.*;
@@ -21,28 +19,36 @@ import java.util.List;
 public class Round implements Serializable {
 
     @Id
+    @Getter
     @SequenceGenerator(name = "round_id_generator", sequenceName = "round_seq", allocationSize = 1)
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "round_id_generator")
     private Long id;
 
+    @Getter
+    @Setter
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "game_id", nullable = false)
     @JsonIgnoreProperties("rounds")
     private Game game;
 
+    @Getter
+    @Setter
     @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     @JoinColumn(name = "word_id", referencedColumnName = "id")
     private Word word;
 
+    @Getter
+    @Setter
     @OneToMany(mappedBy = "round", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @JsonIgnoreProperties("round")
     private List<Try> tries = new ArrayList<>();
 
+    @Getter
     @CreationTimestamp
     @Column(nullable = false, updatable = false)
     private Date createdAt;
 
-    public boolean hasAnswedCorrectly() {
+    public boolean hasAnsweredCorrectly() {
         for (Try t: this.tries) {
             if (t.isCorrect()) {
                 return true;
@@ -52,9 +58,9 @@ public class Round implements Serializable {
     }
 
     public RoundStatus getStatus() {
-        if (this.tries.size() == 0) {
+        if (this.tries == null || this.tries.size() == 0) {
             return RoundStatus.START;
-        } else if (this.hasAnswedCorrectly()) {
+        } else if (this.hasAnsweredCorrectly()) {
             return RoundStatus.WON;
         } else if (this.tries.size() >= 5) {
             return RoundStatus.LOST;
@@ -64,7 +70,7 @@ public class Round implements Serializable {
     }
 
     private Try getLastTry() {
-        if (this.tries.size() > 0) {
+        if (this.tries != null && this.tries.size() > 0) {
             this.tries.sort((r1, r2) -> r1.getCreatedAt().compareTo(r2.getCreatedAt()));
             return this.tries.get(this.tries.size() - 1);
         }
@@ -74,7 +80,7 @@ public class Round implements Serializable {
 
     public boolean reactedInTime() {
         Try lastTry = this.getLastTry();
-        if (lastTry != null) {
+        if (lastTry != null && lastTry.getCreatedAt() != null) {
             Timestamp now = new Timestamp(System.currentTimeMillis());
             int secondsBetween = (int) ((now.getTime() - lastTry.getCreatedAt().getTime()) / 1000);
             if (secondsBetween > 10) {
@@ -87,37 +93,5 @@ public class Round implements Serializable {
 
     public boolean canAnswer() {
         return this.getStatus() == RoundStatus.START || this.getStatus() == RoundStatus.PROGRESS;
-    }
-
-    public Long getId() {
-        return id;
-    }
-
-    public List<Try> getTries() {
-        return tries;
-    }
-
-    public void setTries(List<Try> tries) {
-        this.tries = tries;
-    }
-
-    public Game getGame() {
-        return game;
-    }
-
-    public void setGame(Game game) {
-        this.game = game;
-    }
-
-    public void setWord(Word word) {
-        this.word = word;
-    }
-
-    public Word getWord() {
-        return word;
-    }
-
-    public Date getCreatedAt() {
-        return createdAt;
     }
 }

@@ -3,6 +3,7 @@
 [![Maintainability Rating](https://sonarcloud.io/api/project_badges/measure?project=lingo&metric=sqale_rating)](https://sonarcloud.io/dashboard?id=lingo)
 [![Bugs](https://sonarcloud.io/api/project_badges/measure?project=lingo&metric=bugs)](https://sonarcloud.io/dashboard?id=lingo)
 [![Coverage](https://sonarcloud.io/api/project_badges/measure?project=lingo&metric=coverage)](https://sonarcloud.io/dashboard?id=lingo)
+
 # Lingo application
 Deze lingo applicatie draait met docker en kan gerund worden met docker-compose up.
 Door dit command te draaien word de DB en de applicatie gestart (port 9091).

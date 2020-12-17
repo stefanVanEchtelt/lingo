@@ -56,4 +56,13 @@ class GameTest {
 
         assertEquals(4, game.getScore());
     }
+
+    @Test
+    void checkGameEnd() {
+        Game game = new Game();
+
+        game.end();
+
+        assertEquals(GameStatus.FINISHED, game.getGameStatus());
+    }
 }

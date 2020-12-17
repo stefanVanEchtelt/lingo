@@ -10,7 +10,6 @@ import java.util.Map;
 @AllArgsConstructor
 public class WordChecker {
     private final WordDifference wordDifference;
-    private final WordFilter filter;
 
     public WordFeedback checkDifference(Word word, String guessWord) {
         return this.wordDifference.check(word.getValue(), guessWord);
