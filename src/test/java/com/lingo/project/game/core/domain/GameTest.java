@@ -2,6 +2,9 @@ package com.lingo.project.game.core.domain;
 
 import org.junit.jupiter.api.Test;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import static org.junit.jupiter.api.Assertions.*;
 
 class GameTest {
@@ -64,5 +67,37 @@ class GameTest {
         game.end();
 
         assertEquals(GameStatus.FINISHED, game.getGameStatus());
+    }
+
+    @Test
+    void checkCurrentRoundsNoRoundsGame() {
+        Game game = new Game();
+
+        Round round = game.getCurrentRound();
+
+        assertNull(round);
+    }
+
+    @Test
+    void checkCurrentRoundsGame() {
+        Game game = new Game();
+        Round round = new Round();
+        game.addRound(round);
+
+        Round currentRound = game.getCurrentRound();
+
+        assertEquals(round, currentRound);
+    }
+
+    @Test
+    void checkEmptyConstructor() {
+        Game game = new Game();
+
+        assertNull(game.getId());
+        assertEquals(GameStatus.PROGRESS, game.getGameStatus());
+        assertEquals(new ArrayList<Round>(), game.getRounds());
+        assertNull(game.getCreatedAt());
+        assertEquals(0, game.getScore());
+        assertNull(game.getUsername());
     }
 }

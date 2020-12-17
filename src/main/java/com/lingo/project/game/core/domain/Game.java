@@ -31,7 +31,7 @@ public class Game implements Serializable {
 
     @OneToMany(mappedBy = "game", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @JsonIgnoreProperties("game")
-    private List<Round> rounds = new ArrayList<>();
+    private List<Round> rounds = new ArrayList<Round>();
 
     @CreationTimestamp
     @Column(nullable = false, updatable = false)
@@ -58,9 +58,13 @@ public class Game implements Serializable {
     }
 
     public Round getCurrentRound() {
-        this.rounds.sort((r1, r2) -> r1.getCreatedAt().compareTo(r2.getCreatedAt()));
+        if (this.rounds != null & this.rounds.size() > 0) {
+            this.rounds.sort((r1, r2) -> r1.getCreatedAt().compareTo(r2.getCreatedAt()));
 
-        return this.rounds.get(this.rounds.size() - 1);
+            return this.rounds.get(this.rounds.size() - 1);
+        }
+
+        return null;
     }
 
     public void correctWord() {

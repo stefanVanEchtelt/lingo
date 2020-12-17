@@ -37,7 +37,7 @@ public class Try implements Serializable {
     private String value;
 
     public boolean isCorrect() {
-        if (this.round.getWord() != null && this.round.getWord().getValue() != null) {
+        if (this.round != null && this.round.getWord() != null && this.round.getWord().getValue() != null) {
             return this.round.getWord().getValue().equals(this.value);
         }
 
