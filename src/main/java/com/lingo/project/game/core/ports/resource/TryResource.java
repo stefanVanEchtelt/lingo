@@ -2,11 +2,12 @@ package com.lingo.project.game.core.ports.resource;
 
 import com.lingo.project.game.core.domain.Game;
 import com.lingo.project.word.core.domain.WordFeedback;
-import lombok.Data;
+import lombok.Getter;
 
-@Data
 public class TryResource {
+    @Getter
     private GameResource game;
+    @Getter
     private WordFeedback wordFeedback;
 
     public TryResource(Game game, WordFeedback wordFeedback) {
