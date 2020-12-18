@@ -31,6 +31,6 @@ class GameResourceTest {
         assertEquals(game.getGameStatus(), gameResource.getGameStatus());
         assertEquals(game.getCreatedAt(), gameResource.getCreatedAt());
         assertEquals(game.getScore(), gameResource.getCurrentScore());
-        assertEquals(roundResource, gameResource.getCurrentRound());
+        assertEquals(roundResource.getRoundId(), gameResource.getCurrentRound().getRoundId());
     }
 }

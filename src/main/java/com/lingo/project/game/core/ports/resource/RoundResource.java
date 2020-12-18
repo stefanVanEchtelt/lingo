@@ -17,18 +17,4 @@ public class RoundResource {
         this.worthLength = round.getWord().getValue().length();
         this.amountOfTries = round.getTries().size();
     }
-
-    @Override
-    public boolean equals(Object o){
-        // self check
-        if(this == o){ return true; } else
-            // null check
-            if(o == null){ return false;} else
-                // type check and cast
-                if(getClass() != o.getClass()){ return false; } else {
-                    final RoundResource a = (RoundResource) o;
-                    // field comparison
-                    return Objects.equals(a, a);
-                }
-    }
 }

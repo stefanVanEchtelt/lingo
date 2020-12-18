@@ -33,6 +33,6 @@ class TryResourceTest {
         TryResource tryResource = new TryResource(game, wordFeedback);
 
         assertEquals(wordFeedback, tryResource.getWordFeedback());
-        assertEquals(gameResource, tryResource.getGame());
+        assertEquals(gameResource.getId(), tryResource.getGame().getId());
     }
 }
