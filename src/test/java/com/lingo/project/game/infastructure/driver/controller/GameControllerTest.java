@@ -42,9 +42,9 @@ class GameControllerTest {
                 .createdAt(new Timestamp(System.currentTimeMillis())).score(1)
                 .rounds(rounds).build();
 
-        Mockito.when(gameProcessor.start()).thenReturn(game);
+        Mockito.when(gameProcessor.start("myUserName")).thenReturn(game);
 
-        mockMvc.perform(post("/game/start"))
+        mockMvc.perform(post("/game/start/myUserName"))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.id").value(game.getId()))
                 .andExpect(jsonPath("$.gameStatus").value(game.getGameStatus().name()))

@@ -22,9 +22,9 @@ public class GameController {
         this.gameProcessor = gameProcessor;
     }
 
-    @PostMapping(path = "/start")
-    public ResponseEntity<GameResource> start() {
-        Game game = this.gameProcessor.start();
+    @PostMapping(path = "/start/{username}")
+    public ResponseEntity<GameResource> start(@PathVariable String username) {
+        Game game = this.gameProcessor.start(username);
         return new ResponseEntity<>(new GameResource(game), HttpStatus.OK);
     }
 

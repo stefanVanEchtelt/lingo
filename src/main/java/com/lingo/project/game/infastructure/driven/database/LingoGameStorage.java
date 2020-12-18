@@ -20,8 +20,8 @@ public class LingoGameStorage implements GameStorage {
     private final WordRepository wordRepository;
 
     @Override
-    public Game create() {
-        Game game = this.gameRepository.save(new Game());
+    public Game create(String userName) {
+        Game game = this.gameRepository.save(Game.builder().username(userName).build());
         Word word = this.wordRepository.findRandomByWordLength(5);
 
         Round round = new Round();

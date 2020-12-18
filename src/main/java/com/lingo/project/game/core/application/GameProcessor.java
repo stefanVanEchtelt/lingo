@@ -15,8 +15,8 @@ public class GameProcessor {
         this.gameStorage = gameStorage;
     }
 
-    public Game start() {
-        return this.gameStorage.create();
+    public Game start(String userName) {
+        return this.gameStorage.create(userName);
     }
 
     public Optional<Game> find(Long id) {
