@@ -10,7 +10,7 @@ import java.util.List;
 
 @Service
 @AllArgsConstructor
-public class WordProcessor {
+public class WordProcessor implements WordProcessorInterface {
     private final WordFilter wordFilter;
     private final WordStorage wordStorage;
 

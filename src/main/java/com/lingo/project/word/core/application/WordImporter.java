@@ -14,7 +14,7 @@ import static java.util.stream.Collectors.toList;
 public class WordImporter {
     private final WordReader reader;
     private final WordFilter filter;
-    private final WordProcessor wordProcessor;
+    private final WordProcessorInterface wordProcessor;
 
     public void importWords() {
         List<String> filteredWords = reader.readWords()
