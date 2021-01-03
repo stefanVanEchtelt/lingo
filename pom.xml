@@ -87,12 +87,12 @@
                 <configuration>
                     <source>11</source>
                     <target>11</target>
+                    <testSource>11</testSource>
+                    <testTarget>11</testTarget>
                 </configuration>
 
 <!--                <version>3.5.1</version>-->
 <!--                <configuration>-->
-<!--&lt;!&ndash;                    <source>${java.version}</source>&ndash;&gt;-->
-<!--&lt;!&ndash;                    <target>${java.version}</target>&ndash;&gt;-->
 <!--                    <source>9</source>-->
 <!--                    <target>9</target>-->
 <!--                </configuration>-->
