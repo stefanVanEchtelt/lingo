@@ -82,13 +82,20 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
-                <version>3.5.1</version>
+
+                <version>3.8.0</version>
                 <configuration>
-                    <source>${java.version}</source>
-                    <target>${java.version}</target>
+                    <source>11</source>
+                    <target>11</target>
+                </configuration>
+
+<!--                <version>3.5.1</version>-->
+<!--                <configuration>-->
+<!--&lt;!&ndash;                    <source>${java.version}</source>&ndash;&gt;-->
+<!--&lt;!&ndash;                    <target>${java.version}</target>&ndash;&gt;-->
 <!--                    <source>9</source>-->
 <!--                    <target>9</target>-->
-                </configuration>
+<!--                </configuration>-->
             </plugin>
 
             <plugin>
