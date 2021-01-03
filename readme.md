@@ -4,6 +4,11 @@
 [![Bugs](https://sonarcloud.io/api/project_badges/measure?project=lingo&metric=bugs)](https://sonarcloud.io/dashboard?id=lingo)
 [![Coverage](https://sonarcloud.io/api/project_badges/measure?project=lingo&metric=coverage)](https://sonarcloud.io/dashboard?id=lingo)
 
+# Application lokaal runnen
+- docker compose build
+- docker compose up
+- http://localhost:9091/game/start/{yourName}
+
 # Lingo application
 Deze lingo applicatie draait met docker en kan gerund worden met docker-compose up.
 Door dit command te draaien word de DB en de applicatie gestart (port 9091).
@@ -14,6 +19,7 @@ In deze applicatie zit ook sonarCloud (code/bug checker).
 Deze applicatie draait op heroku en is te bekijken via: https://stefan-lingo.herokuapp.com/. 
 Deze applicatie is aan de hand van de docker image online gezet.
 Ook word deze applicatie automatich gedepolyed door huroku indien alle github action jobs zijn geslaagd.
+Om een game te starten -> https://stefan-lingo.herokuapp.com/game/start/{yourName}
 
 # Toelichting
 Denk dat het wel leuk is om te weten dat dit de 1e keer was voor mij dat ik docker heb gebruikt. 
