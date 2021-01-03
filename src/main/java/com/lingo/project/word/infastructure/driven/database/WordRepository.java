@@ -10,6 +10,6 @@ import org.springframework.stereotype.Repository;
 public interface WordRepository extends JpaRepository<Word, Long> {
     boolean existsByValue(String value);
 
-    @Query(value = "select * from word where LENGTH(value) = :wordLength and is_deleted = 0 order by random() limit 1", nativeQuery = true)
+    @Query(value = "select * from word where LENGTH(value) = :wordLength and is_deleted = false order by random() limit 1", nativeQuery = true)
     Word findRandomByWordLength(@Param("wordLength") int length);
 }

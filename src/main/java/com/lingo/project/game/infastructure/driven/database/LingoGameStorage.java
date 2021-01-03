@@ -1,6 +1,7 @@
 package com.lingo.project.game.infastructure.driven.database;
 
 import com.lingo.project.game.core.domain.Game;
+import com.lingo.project.game.core.domain.GameStatus;
 import com.lingo.project.game.core.domain.Round;
 import com.lingo.project.game.core.ports.GameStorage;
 import com.lingo.project.word.core.domain.Word;
@@ -21,7 +22,7 @@ public class LingoGameStorage implements GameStorage {
 
     @Override
     public Game create(String userName) {
-        Game game = this.gameRepository.save(Game.builder().username(userName).build());
+        Game game = this.gameRepository.save(Game.builder().username(userName).gameStatus(GameStatus.PROGRESS).rounds(new ArrayList<Round>()).build());
         Word word = this.wordRepository.findRandomByWordLength(5);
 
         Round round = new Round();

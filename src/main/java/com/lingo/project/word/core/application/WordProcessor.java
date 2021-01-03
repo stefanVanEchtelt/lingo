@@ -16,7 +16,7 @@ public class WordProcessor implements WordProcessorInterface {
 
     public void addSingle(String wordValue) {
         if (this.wordFilter.verify(wordValue)) {
-            Word word = Word.builder().value(wordValue).build();
+            Word word = Word.builder().value(wordValue).isDeleted(false).build();
             this.wordStorage.store(word);
         }
     }
